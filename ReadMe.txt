@@ -9,3 +9,12 @@
 
 - switch version of python between 2 and 3
 - https://blog.csdn.net/hero_myself/article/details/88745888
+
+# get started with commonroad_io
+# https://commonroad-io.readthedocs.io/en/latest/
+
+# git clone https://gitlab.lrz.de/tum-cps/commonroad_io.git
+# and add the folder commonroad_io to your Python environment.
+
+# git clone https://github.com/robotframework/WebDemo.git
+# pip install robotframework
