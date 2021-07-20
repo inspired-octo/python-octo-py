@@ -1,48 +1,27 @@
-from commonroad_io.commonroad import common
-from commonroad_io.commonroad.common.file_reader import CommonRoadFileReader
-import os
-import time
-import requests
-import pandas as pd
-from pprint import pprint
-from lxml import etree
-import time
-import warnings
-warnings.filterwarnings("ignore")
-from IPython import display
-
-import os
-import matplotlib.pyplot as plt
-from commonroad_io.commonroad.visualization.draw_dispatch_cr import draw_object
-
-# file_path = os.path.join(os.getcwd(), 'commonroad-scenarios/scenarios/NGSIM/Lankershim/USA_Lanker-1_1_T-1.xml')
-
-# scenario, planning_problem_set = CommonRoadFileReader(file_path).open()
-
-# plt.figure(figsize=(25, 10))
-# draw_object(scenario)
-# # draw_object(planning_problem_set)
-# plt.gca().set_aspect('equal')
-# plt.show()
-file_path = '/Users/shifei/Desktop/octo-rupin/python-octo-py/commonroad-scenarios/scenarios/interactive/hand-crafted/ZAM_Tutorial-1_1_I-1-1/ZAM_Tutorial-1_1_I-1-1.cr.xml'
-
-
-# read in the scenario and planning problem set
-scenario, planning_problem_set = CommonRoadFileReader(file_path).open()
-
-# plot the scenario for 40 time step, here each time step corresponds to 0.1 second
-for i in range(0, 40):
-    # uncomment to clear previous graph
-    # display.clear_output(wait=True)
+from urllib import request
+ 
+def getResponse(url):
+    #url请求对象 Request是一个类
+    url_request = request.Request(url)
+    print("这个对象的方法是：",url_request.get_method())
     
-    plt.figure(figsize=(20, 10))
-    # plot the scenario at different time step
-    draw_object(scenario, draw_params={'time_begin': i})
-    # plot the planning problem set
-    draw_object(planning_problem_set)
-    plt.gca().set_aspect('equal')
-    plt.show()
-
-print("[Log ERROR]:\033[1;31;23m red!\033[0m")
-print("[Log WARNING]:\033[1;33;23m yellow!\033[0m")
-print("[Log INFO]:\033[1;32;23mtgreen!\033[0m")
+    #上下文管理器，HTTPResponse 对象，包含一系列方法
+    url_response = request.urlopen(url) #打开一个url或者一个Request对象
+    print(url_response.geturl().html.text)
+    '''
+       geturl()：返回 full_url地址
+         info(): 返回页面的元(Html的meta标签)信息
+         <meta>：可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。
+      getcode(): 返回响应的HTTP状态代码 
+      100-199 用于指定客户端应相应的某些动作。
+      200-299 用于表示请求成功。      ------>  200
+      300-399 用于已经移动的文件并且常被包含在定位头信息中指定新的地址信息。
+      400-499 用于指出客户端的错误。  ------>  404
+      500-599 用于支持服务器错误。 
+         read(): 读取网页内容，注意解码方式(避免中文和utf-8之间转化出现乱码)
+    '''
+ 
+    return url_response   #返回这个对象
+ 
+http_response = getResponse("https://nasa.cainiao.com/operation#/schedule") #拿到http请求后的上下文对象(HTTPResponse object)
+print(http_response)
