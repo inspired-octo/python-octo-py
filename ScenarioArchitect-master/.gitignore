@@ -1,0 +1,8 @@
+.idea*
+*__pycache__*
+\interface_package/build*
+\interface_package/dist*
+\interface_package/scenario_testing_tools\.egg-info/
+
+# sphinx related content
+/docs/build/*
